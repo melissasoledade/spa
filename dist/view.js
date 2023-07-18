@@ -11,7 +11,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var View;
 (function (View) {
     // import ToDoItem = Model.ToDoItem
+    class TabView {
+    }
     function buildItemList(items, container) {
+        var _a;
         for (const item of items) {
             const template = document.getElementById('list-item-template');
             const clone = template.content.cloneNode(true);
@@ -19,9 +22,27 @@ var View;
             const description = clone.querySelector('.list-item-desc');
             const badgeContainer = clone.querySelector('.badge-container');
             const deadline = clone.querySelector('.list-item-deadline');
+            (_a = listItem === null || listItem === void 0 ? void 0 : listItem.querySelector('.form-check-input')) === null || _a === void 0 ? void 0 : _a.setAttribute('data-id', item.id.toString());
             // TODO: identify the checkboxes
             if (description) {
                 description.textContent = item.description;
+            }
+            if (deadline === null || deadline === void 0 ? void 0 : deadline.textContent) {
+                const date = Date.parse((item === null || item === void 0 ? void 0 : item.deadline) || '');
+                deadline.textContent = (date)
+                    ? new Date(date).toUTCString().slice(0, 16)
+                    : '';
+            }
+            const badgeTemplate = clone.querySelector('.list-item-badge');
+            if (item.tags && item.tags.length > 0) {
+                for (const tag of item.tags) {
+                    const newBadge = badgeTemplate === null || badgeTemplate === void 0 ? void 0 : badgeTemplate.cloneNode;
+                    newBadge.textContent = tag;
+                    badgeContainer === null || badgeContainer === void 0 ? void 0 : badgeContainer.appendChild(newBadge);
+                }
+            }
+            if (badgeTemplate) {
+                badgeTemplate === null || badgeTemplate === void 0 ? void 0 : badgeTemplate.removeChild(badgeTemplate);
             }
             if (listItem) {
                 container.appendChild(listItem);

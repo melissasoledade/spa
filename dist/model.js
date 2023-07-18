@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var Model;
 (function (Model) {
     // TODO: change to your RA
-    const ra = '';
+    const ra = '11072216';
     const host = 'https://todo-server-spa-ozyq2qhxqq-rj.a.run.app/api';
     class ToDoItemDao {
         listAll() {
